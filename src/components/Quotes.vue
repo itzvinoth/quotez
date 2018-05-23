@@ -63,7 +63,7 @@ export default {
         ctx.fillStyle = "red";
         var textLength = this.quotes[this.count].text.length;
 
-        ctx.fillText(this.quotes[this.count].text, window.innerWidth/Number(textLength/10), window.innerHeight/2);
+        ctx.fillText(this.quotes[this.count].text, window.innerWidth/Number((textLength*1.2)/10), window.innerHeight/2);
 
         var dataContext = ctx.getImageData(0, 0, canvas.width, canvas.height);
         var compositeOperation = ctx.globalCompositeOperation;
@@ -136,6 +136,7 @@ button {
 }
 button:hover {
   background: #eff3f6;
+  cursor: pointer;
   -webkit-box-shadow: 0px 1px 11px #2c3e50;
   -moz-box-shadow: 0px 1px 11px #2c3e50;
   box-shadow: 0px 1px 11px #2c3e50;
@@ -165,6 +166,7 @@ button:hover {
 }
 .buttonDownload:hover {
   background: #eff3f6;
+  cursor: pointer;
   -webkit-box-shadow: 0px 1px 11px #2c3e50;
   -moz-box-shadow: 0px 1px 11px #2c3e50;
   box-shadow: 0px 1px 11px #2c3e50;
