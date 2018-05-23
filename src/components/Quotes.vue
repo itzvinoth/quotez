@@ -80,7 +80,8 @@ export default {
         var imageData = canvas.toDataURL("image/png");
         var data = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
         var link = document.createElement("a");
-        link.download = "quote.png";
+        var personName = this.quotes[this.count].text.split(' - ')[1];
+        link.download = personName+" quote.png";
         link.href = data;
         document.body.appendChild(link);
         link.click();
