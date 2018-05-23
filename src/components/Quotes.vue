@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <div id="quoteId" >
+    <div id="quoteId" class="quote">
       <h1>{{ quotes[count].text }}</h1>
     </div>
     <div id="buttonDiv">
-      <button v-on:click="decrement"><span>Previous</span><div class="arrow-left"></div></button>
-      <button v-on:click="download"><div class="buttonDownload">Download</div></button>
-      <button v-on:click="increment"><span>Next</span><div class="arrow-right"></div></button>
+      <button v-on:click="decrement" id="decrementId"><span>Prev</span><div class="arrow-left"></div></button>
+      <div class="buttonDownload" v-on:click="download">Download</div>
+      <button v-on:click="increment" id="incrementId"><span>Next</span><div class="arrow-right"></div></button>
     </div>
   </div>
 </template>
@@ -14,9 +14,8 @@
 <script>
 import html2canvas from 'html2canvas';
 
-
 export default {
-  name: 'HelloWorld',
+  name: 'Quotes',
   data() {
     return {
       quotes: [{
@@ -34,13 +33,23 @@ export default {
       count: 0
     }
   },
+  mounted() {
+    let quoteElement = document.getElementById("quoteId");
+    setTimeout(() => quoteElement.classList.remove("quote"), 1000);
+  },
   methods: {
+    addClassMethod() {
+      let quoteElement = document.getElementById("quoteId");
+      quoteElement.classList.add("quote");
+      setTimeout(() => quoteElement.classList.remove("quote"), 500);
+    },
     decrement: function() {
       (this.count !== 0) ? this.count-- : this.count = -(this.count-4)
+      this.addClassMethod()
     },
     increment: function() {
       (this.count !== 4) ? this.count++ : this.count = this.count-4
-      
+      this.addClassMethod()
     },
     download: function() {
       
@@ -97,10 +106,10 @@ li {
 a {
   color: #42b983;
 }
-#quoteId {
+.quote {
     opacity: 1;
     animation-name: example;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
 }
 @keyframes example {
     0%   {opacity: 0;}
@@ -109,71 +118,77 @@ a {
 }
 #buttonDiv {
   margin-top: 100px;
+  display: flex;
+  justify-content: space-around;
 }
 button {
-  background: #1890ff;
-  background-image: -webkit-linear-gradient(top, #1890ff, #1890ff);
-  background-image: -moz-linear-gradient(top, #1890ff, #1890ff);
-  background-image: -ms-linear-gradient(top, #1890ff, #1890ff);
-  background-image: -o-linear-gradient(top, #1890ff, #1890ff);
-  background-image: linear-gradient(to bottom, #1890ff, #1890ff);
+  background: #eff3f6;
+  background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
   -webkit-border-radius: 4;
   -moz-border-radius: 4;
   border-radius: 4px;
-  text-shadow: 1px 1px 3px #666666;
-  -webkit-box-shadow: 0px 1px 11px #666666;
-  -moz-box-shadow: 0px 1px 11px #666666;
-  box-shadow: 0px 1px 11px #666666;
   font-family: Arial;
-  color: #FFF;
+  color: #2c3e50;
   font-size: 16px;
   padding: 10px 20px 10px 20px;
-  border: solid #1890ff 0px;
+  border: 1px solid #666666;
+  text-decoration: none;
+}
+button:hover {
+  background: #eff3f6;
+  -webkit-box-shadow: 0px 1px 11px #2c3e50;
+  -moz-box-shadow: 0px 1px 11px #2c3e50;
+  box-shadow: 0px 1px 11px #2c3e50;
+  background-image: -webkit-linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-image: -moz-linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-image: -ms-linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-image: -o-linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  text-decoration: none;
+}
+.buttonDownload {
+  display: inline-block;
+  position: relative;
+  padding: 10px 20px 10px 20px;
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  border: 1px solid #666666;
+  color: #2c3e50;
+  font-size: 16px;
+  font-family: sans-serif;
+  text-decoration: none;
+  text-align: center;
+  text-indent: 15px;
+  background-color: #eff3f6;
+  background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+}
+.buttonDownload:hover {
+  background: #eff3f6;
+  -webkit-box-shadow: 0px 1px 11px #2c3e50;
+  -moz-box-shadow: 0px 1px 11px #2c3e50;
+  box-shadow: 0px 1px 11px #2c3e50;
+  background-image: -webkit-linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-image: -moz-linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-image: -ms-linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-image: -o-linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
   text-decoration: none;
 }
 
-button:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
-}
 .arrow-right {
   float: right;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid #FFF;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #2c3e50;
   margin-left: 10px;
 }
 .arrow-left {
   float: left;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent; 
-  border-right:10px solid #FFF; 
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent; 
+  border-right:8px solid #2c3e50; 
   margin-right: 10px;
-}
-
-.buttonDownload {
-  display: inline-block;
-  position: relative;
-  padding: 10px 25px;
-  
-  background-color: #1890ff;
-  color: white;
-  
-  font-family: sans-serif;
-  text-decoration: none;
-  font-size: 0.9em;
-  text-align: center;
-  text-indent: 15px;
-}
-
-.buttonDownload:hover {
-  background-color: #333;
-  color: white;
 }
 
 .buttonDownload:before, .buttonDownload:after {
@@ -190,6 +205,7 @@ button:hover {
   height: 2px;
   border-style: solid;
   border-width: 0 2px 2px;
+  color: #2c3e50;
 }
 
 /* Download arrow shape */
@@ -198,14 +214,12 @@ button:hover {
   height: 0;
   margin-left: 3px;
   margin-top: -7px;
-  
+  color: #2c3e50;
   border-style: solid;
   border-width: 4px 4px 0 4px;
   border-color: transparent;
   border-top-color: inherit;
   
-  animation: downloadArrow 2s linear infinite;
-  animation-play-state: paused;
 }
 
 </style>
